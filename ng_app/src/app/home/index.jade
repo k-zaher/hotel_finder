@@ -1,0 +1,19 @@
+.system-message.col-lg-2.col-lg-offset-4
+  {{home.systemMsg}}
+.row
+  .lat Lat: {{home.lat}}
+  .long Long: {{home.long}}
+
+.hotels
+  .container
+    .row
+      .col-xs-3(ng-repeat="hotel in home.hotels")
+        .project.project-default
+          .shape
+            .shape-text
+              | {{hotel.rating}}
+          .project-content
+            image(ng-src="{{hotel.photo_url}}", ng-if="hotel.photo_url")
+            .name
+              | {{hotel.name}}
+            button.btn.btn-primary(ng-click= "home.openBookingModal(hotel)") Book

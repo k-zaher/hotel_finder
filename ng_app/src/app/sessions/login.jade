@@ -1,0 +1,9 @@
+.row
+  .col-md-offset-4.col-md-4
+    form.form-horizontal(ng_submit='sessions.handleSignIn(loginForm)', role='form')
+      h4 Welcome back.
+      input#email.form-control(name='email', ng_model='loginForm.email', required='required', type='email', placeholder='Email', autofocus='autofocus')
+      br
+      input#password.form-control(name='password', ng_model='loginForm.password', required='required', type='password', placeholder='Password')
+      br
+      button.btn.btn-blue(type='submit') Sign in

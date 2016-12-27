@@ -1,0 +1,34 @@
+.modal-header
+  h3#modal-title.modal-title Create Booking for {{booking.hotel.name}}
+#modal-body.modal-body
+  .form(name='bookingForm', role="form")
+    .form-group.row
+      label.col-xs-2.col-form-label(for='example-text-input') Guest Name
+      .col-xs-10
+        input#example-text-input.form-control(type='text', value='', ng-model="bookingForm.guest_name", ng-required="true")
+    .form-group.row
+      label.col-xs-2.col-form-label(for='example-search-input') Preferences
+      .col-xs-10
+        select(ng-model='bookingForm.preference')
+          option(type="number", ng-repeat='x in booking.preferences', value='{{x.value}}') {{x.name}}
+    .form-group.row
+      label.col-xs-2.col-form-label(for='example-email-input') Checkin date
+      .col-xs-5
+        p.input-group
+          input.form-control(type='text', uib-datepicker-popup='{{booking.format}}', ng-model='bookingForm.checkin_date', is-open='booking.popup1.opened', datepicker-options='booking.dateOptions', close-text='Close')
+          span.input-group-btn
+            button.btn.btn-default(type='button', ng-click='booking.open1()')
+              i.fa.fa-calendar
+    .form-group.row
+      label.col-xs-2.col-form-label(for='example-email-input') Checkout date
+      .col-xs-5
+        p.input-group
+          input.form-control(type='text', uib-datepicker-popup='{{booking.format}}', ng-model='bookingForm.checkout_date', is-open='booking.popup2.opened', datepicker-options='booking.dateOptions', close-text='Close')
+          span.input-group-btn
+            button.btn.btn-default(type='button', ng-click='booking.open2()')
+              i.fa.fa-calendar
+
+
+.modal-footer
+  button.btn.btn-danger(type='button', ng-click='booking.close()') Cancel
+  button.btn.btn-primary(ng-click='booking.submitBooking(bookingForm)') Book
