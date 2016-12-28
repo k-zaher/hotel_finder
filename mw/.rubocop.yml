@@ -1,0 +1,18 @@
+AllCops:
+  Excludes:
+    - db/*
+    - db/migrate/*
+    - bin/**
+    - app/mailers/**
+Rails:
+  Enabled: true
+Metrics/MethodLength:
+  Max: 20
+Style/ClassVars:
+  Enabled: false
+Style/AsciiComments:
+  Enabled: false
+Metrics/LineLength:
+  Max: 120
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact

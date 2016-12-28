@@ -1,30 +1,30 @@
 require 'rubygems'
 require 'open-uri'
 require 'json'
+# Interfaces Google Places
+module GooglePlaces::Fetcher
+  class << self
+    PLACESBASEURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?'.freeze
 
-module GooglePlaces
-  module Fetcher
-    class << self
-      PLACESBASEURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?".freeze
-
-      def run(lat, long)
-        Rails.cache.fetch("places/#{lat}/#{long}", expires_in: 12.hours) do
-          puts "hello"
-          result = open(prepare_url(lat, long)) do |file|
-            JSON.parse(file.read)
-          end
-          result["results"].map { |obj| GooglePlaces::Serializer.format(obj) }
+    def run(lat, long)
+      url = prepare_url(lat, long, 'lodging', 10_000.to_s)
+      Rails.cache.fetch("places/#{lat}/#{long}", expires_in: 12.hours) do
+        result = open(url) do |file|
+          JSON.parse(file.read)
         end
+        result['results'].map { |obj| GooglePlaces::Serializer.format(obj) }
       end
+    end
 
-      private
+    private
 
-      def prepare_url(lat, long)
-        radius = 10000.to_s
-        type = 'lodging'
-        key = Rails.application.secrets.google_places_key
-        PLACESBASEURL + 'location=' + lat + ',' + long  + '&' + 'radius=' + radius + '&' + "type=" + type + '&' + "key=" + key
-      end
+    def prepare_url(lat, long, type, radius)
+      url = PLACESBASEURL
+      url += 'location=' + lat + ',' + long
+      url += '&' + 'radius=' + radius
+      url += '&' + 'type=' + type
+      url += '&' + 'key=' + Rails.application.secrets.google_places_key
+      url
     end
   end
 end

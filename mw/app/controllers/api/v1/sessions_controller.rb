@@ -1,3 +1,4 @@
+# Authentication Controller
 class Api::V1::SessionsController < Devise::SessionsController
   def create
     user = warden.authenticate!(auth_options)
@@ -11,9 +12,9 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def failure
-    render :status => 401,
-           :json => { :success => false,
-                      :message => 'Login Failed'}
+    render status: 401,
+           json: { success: false,
+                   message: 'Login Failed' }
   end
 
   private

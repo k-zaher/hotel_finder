@@ -11,7 +11,7 @@
 
     vm.handleSignIn = function(loginForm){
       $log.info(loginForm)
-      Restangular.all('sessions').post({"user" : loginForm}).then(function(result) {
+      Restangular.all('sessions').post({"user": loginForm}).then(function(result) {
           $log.info(result.message)
           $cookies.put("user_token", result.authentication_token);
           $cookies.put("user_email", loginForm.email);

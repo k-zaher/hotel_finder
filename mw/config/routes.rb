@@ -7,8 +7,12 @@ Rails.application.routes.draw do
         post 'sessions' => 'sessions#create', :as => 'login'
         delete 'sessions' => 'sessions#destroy', :as => 'logout'
       end
-      resources :hotels, only:[:index]
-      resources :bookings, except:[:show, :destroy]
+      resources :hotels, only: [:index]
+      resources :bookings, only: [:create, :index] do
+        collection do
+          get '/:user_id' => 'bookings#for_user'
+        end
+      end
     end
   end
 end
