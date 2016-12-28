@@ -199,8 +199,8 @@ run `rspec`
 
 ***I have deployed the ng app on bitballon and the mw on heroku You can play with it using the following urls:***
 
-* ***FrontEnd:*** [https://conichi-hotel.bitballoon.com/#/]()
-* ***BackEnd*** [https://conichi-mw.herokuapp.com/]()
+* ***FrontEnd:*** [https://conichi-hotel.bitballoon.com/#/](https://conichi-hotel.bitballoon.com/#/)
+* ***BackEnd*** [https://conichi-mw.herokuapp.com/](https://conichi-mw.herokuapp.com/)
 
 
 
