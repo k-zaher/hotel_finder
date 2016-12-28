@@ -5,6 +5,7 @@ branches:
   only:
   - master
 before_script: cd mw
+script: bundle exec rake RAILS_ENV=test
 addons:
   code_climate:
     repo_token: 94869ed440cfcde7ea06a4458b35dd6ad74590d6f188d13969a14014c93166e8
