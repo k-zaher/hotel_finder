@@ -199,8 +199,14 @@ run `rspec`
 
 ***I have deployed the ng app on bitballon and the mw on heroku You can play with it using the following urls:***
 
-* ***FrontEnd:*** [https://conichi-hotel.bitballoon.com/#/](https://conichi-hotel.bitballoon.com/#/)
-* ***BackEnd*** [https://conichi-mw.herokuapp.com/](https://conichi-mw.herokuapp.com/)
+* ***FrontEnd:*** <a href="https://conichi-hotel.bitballoon.com/#/" target="_blank">https://conichi-hotel.bitballoon.com/#/</a>
+* ***BackEnd*** <a href="https://conichi-mw.herokuapp.com/" target="_blank">https://conichi-mw.herokuapp.com/</a>
+* 
+
+**Note:** On the ClientApp use these credentials to login
+
+* email: "abraham@boylebergstrom.io"
+* password: "test@1234"
 
 
 
