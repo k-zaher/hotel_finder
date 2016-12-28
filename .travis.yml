@@ -6,6 +6,9 @@ branches:
   - master
 gemfile:
   - mw/Gemfile
+services:
+  - redis-server
+  - postgresql
 before_script:
   - cp ./database.yml.travis mw/config/database.yml
   - cd mw
