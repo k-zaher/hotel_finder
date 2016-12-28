@@ -28,7 +28,7 @@ module Mw
     # Skip views, helpers and assets when generating a new resource.
     config.action_controller.perform_caching = true
     config.cache_store = :redis_store, 'redis://localhost:6379/0/cache', { expires_in: 90.minutes }
-    config.autoload_paths << Rails.root.join('lib')
+    config.eager_load_paths << Rails.root.join('lib')
     config.api_only = true
     config.middleware.delete ActionDispatch::Session::CookieStore
     config.middleware.insert_before 0, Rack::Cors do

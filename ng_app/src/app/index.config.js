@@ -41,6 +41,7 @@
     });
 
     RestangularProvider.setBaseUrl('http://localhost:3000/api/v1/');
+    // RestangularProvider.setBaseUrl('https://conichi-mw.herokuapp.com/api/v1/');
     RestangularProvider.setDefaultRequestParams({format: "json"});
   }
 
