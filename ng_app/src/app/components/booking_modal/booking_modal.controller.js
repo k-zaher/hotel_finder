@@ -6,7 +6,7 @@
     .controller('BookingModalController', BookingModalController);
 
   /** @ngInject */
-  function BookingModalController(params, Restangular, $log) {
+  function BookingModalController(params, Restangular, $log, $uibModalInstance) {
     var vm = this
 
     vm.hotel = params
@@ -17,8 +17,13 @@
       vm.dt = new Date();
     };
 
+    vm.close = function(){
+      $uibModalInstance.close();
+    }
+
     vm.submitBooking = function(form){
-      if(!form || !form.guest_name || !form.preference || !form.checkin_date || !form.checkout_date){
+      console.log(form)
+      if(!form || !form.guest_name || !form.checkin_date || !form.checkout_date){
         alert("All Fields are required")
         return
       }
@@ -26,7 +31,8 @@
         alert("Checkout Date should be after Checkin Date")
         return
       }
-      form.preference = parseInt(form.preference)
+      form.checkin_date = form.checkin_date.toDateString()
+      form.checkout_date = form.checkout_date.toDateString()
       Restangular.all('bookings').post({
         hotel: vm.hotel,
         booking: form
@@ -41,7 +47,6 @@
     vm.today();
 
     vm.inlineOptions = {
-      customClass: getDayClass,
       minDate: new Date(),
       showWeeks: true
     };
@@ -49,7 +54,7 @@
     vm.dateOptions = {
       formatYear: 'yy',
       initDate: new Date(),
-      maxDate: new Date(2022, 12, 1),
+      maxDate: new Date(2022, 11, 1),
       minDate: new Date(),
       startingDay: 1
     };
@@ -67,9 +72,7 @@
       vm.dt = new Date(year, month, day);
     };
 
-    vm.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    vm.format = vm.formats[0];
-    vm.altInputFormats = ['M!/d!/yyyy'];
+    vm.format = 'dd-MMMM-yyyy';
 
     vm.popup1 = {
       opened: false
@@ -93,23 +96,5 @@
         status: 'partially'
       }
     ];
-
-    function getDayClass(data) {
-      var date = data.date,
-        mode = data.mode;
-      if (mode === 'day') {
-        var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-        for (var i = 0; i < vm.events.length; i++) {
-          var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-          if (dayToCheck === currentDay) {
-            return $scope.events[i].status;
-          }
-        }
-      }
-
-      return '';
-    }
   }
 })();

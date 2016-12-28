@@ -13,7 +13,7 @@ class Api::V1::BookingsController < ApplicationController
     if booking.save
       render json: {booking: booking}, status: :ok
     else
-      render json: {message: "Failed to save Booking"}, status: 301
+      render json: {message: booking.errors.full_messages}, status: 422
     end
   end
 

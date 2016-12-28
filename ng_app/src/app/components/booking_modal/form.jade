@@ -9,8 +9,7 @@
     .form-group.row
       label.col-xs-2.col-form-label(for='example-search-input') Preferences
       .col-xs-10
-        select(ng-model='bookingForm.preference')
-          option(type="number", ng-repeat='x in booking.preferences', value='{{x.value}}') {{x.name}}
+        select(ng-init="bookingForm.preference = booking.preferences[0].value", ng-model='bookingForm.preference', ng-options="x.value as x.name for x in booking.preferences")
     .form-group.row
       label.col-xs-2.col-form-label(for='example-email-input') Checkin date
       .col-xs-5

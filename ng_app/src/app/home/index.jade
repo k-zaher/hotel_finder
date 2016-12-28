@@ -1,9 +1,14 @@
-.system-message.col-lg-2.col-lg-offset-4
+.row.status-msg
   {{home.systemMsg}}
 .row
-  .lat Lat: {{home.lat}}
-  .long Long: {{home.long}}
+  .col-lg-offset-3.col-lg-8
+    .col-lg-6(ng-if="!home.geoLocation")
+      input#city.form-control(vs-google-autocomplete="{ types:['(cities)'] }", ng-model='home.city_name', vs-latitude="home.position.lat", vs-longitude="home.position.long",type='text', name='city', placeholder='Enter city name')
+    .col-lg-3.well.pull-right
+      .lat Lat: {{home.position.lat}}
+      .long Long: {{home.position.long}}
 
+//- image(src="https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CoQBdwAAABOXsX0Fm7RBP_xQ2qSytZ4FKrlgWAIEosGwrNC8RPoUXgQdyvdUXYiHtXfQLEKfTEPEKiySmCMT-yIFXHL6PlucN11zrnpxBoYz4m7MyDQdU7GBx-CsN1MDWSqmbGy60m0MSaCQhcJWmH1LpMDI-L9_B3OeSw7ZSZtaM7eZpjMlEhCj0-5vjpwFuF_CnqjpC9PIGhTf36PChGuwysBzE8XIzg3di_PNrA&key=AIzaSyDO6rQjETj9FAD5Qdr18h1umqMqp17VU7Y")
 .hotels
   .container
     .row

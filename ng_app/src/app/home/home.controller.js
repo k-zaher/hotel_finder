@@ -8,31 +8,39 @@
   /** @ngInject */
   function HomeController($scope, Restangular, $log, $state, $cookies, $uibModal) {
     var vm = this
-
+    vm.addressOptions = {types: ['(cities)']}
     vm.systemMsg = "Hello"
-    console.log("HI")
+    vm.geoLocation = true
+    vm.position = {}
 
     if (navigator.geolocation) {
-      vm.systemMsg = "Getting Location *********************************"
-      navigator.geolocation.getCurrentPosition(function(position){
-        console.log(position)
-        $scope.$apply(function(){
-          console.log(position)
-          vm.lat = position.coords.latitude;
-          vm.long = position.coords.longitude;
-          vm.systemMsg = "Getting Hotels *********************************"
-          getHotels()
-        });
+      vm.systemMsg = "Getting Location From Browser"
+      navigator.geolocation.getCurrentPosition(showPosition, errorPosition)
+    }
+
+    function showPosition(position){
+      $scope.$apply(function(){
+        vm.position.lat = position.coords.latitude;
+        vm.position.long = position.coords.longitude;
+      });
+    }
+
+    function errorPosition(){
+      console.log("Error Getting Location")
+      $scope.$apply(function(){
+        vm.geoLocation = false
+        vm.systemMsg = "Failed to Get Location, Please Select your city"
       });
     }
 
 
     function getHotels(){
-      Restangular.all('hotels').getList({lat: vm.lat, long: vm.long}).then(function(result) {
+      vm.systemMsg = "Getting Hotels *********************************"
+      Restangular.all('hotels').getList({lat: vm.position.lat, long: vm.position.long}).then(function(result) {
         vm.hotels = result
+        vm.systemMsg = "Enjoy :)"
       },function(error) {
-          $log.info(error.data.message)
-          alert(error.data.message)
+          $log.info(error)
       });
     }
 
@@ -49,5 +57,14 @@
         }
       });
     }
+
+    $scope.$watch(
+        "home.position.long",
+        function handleFooChange( newValue, oldValue ) {
+          if (newValue){
+            getHotels()
+          }
+        }
+    );
   }
 })();
