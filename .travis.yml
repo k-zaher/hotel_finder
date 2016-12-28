@@ -4,6 +4,8 @@ rvm:
 branches:
   only:
   - master
+gemfile:
+  - mw/Gemfile
 before_script: cd mw
 script: bundle exec rake RAILS_ENV=test
 addons:
