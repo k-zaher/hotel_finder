@@ -1,0 +1,12 @@
+language: ruby
+rvm:
+  - 2.2
+branches:
+  only:
+  - master
+before_script: cd mw
+addons:
+  code_climate:
+    repo_token: 94869ed440cfcde7ea06a4458b35dd6ad74590d6f188d13969a14014c93166e8
+after_success:
+  - cd mw && bundle exec codeclimate-test-reporter
