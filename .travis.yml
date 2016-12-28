@@ -6,8 +6,13 @@ branches:
   - master
 gemfile:
   - mw/Gemfile
-before_script: cd mw
-script: bundle exec rake RAILS_ENV=test
+services:
+  - postgresql
+before_script:
+  - cp ./database.yml.travis mw/config/database.yml
+  - cd mw
+  - psql -c 'create database travis_ci_test;' -U postgres
+
 addons:
   code_climate:
     repo_token: 94869ed440cfcde7ea06a4458b35dd6ad74590d6f188d13969a14014c93166e8
