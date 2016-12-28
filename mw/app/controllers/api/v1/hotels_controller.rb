@@ -12,6 +12,6 @@ class Api::V1::HotelsController < Api::BaseController
   private
 
   def verify_params
-    render json: { message: 'Long and Lat are required' }, status: 401 if !params[:long] || !params[:lat]
+    render json: { message: 'Long and Lat are required' }, status: 401 unless params[:long] && params[:lat]
   end
 end

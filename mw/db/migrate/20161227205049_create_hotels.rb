@@ -5,6 +5,7 @@ class CreateHotels < ActiveRecord::Migration[5.0]
       t.string :pid
       t.timestamps
     end
+
     add_index :hotels, :pid
   end
 end

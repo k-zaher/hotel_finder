@@ -1,6 +1,6 @@
 # Booking Controller which handles create and the Public API
 class Api::V1::BookingsController < Api::BaseController
-  before_action :authenticate_user!, only: [:create]
+  skip_before_action :authenticate_user!, only: [:index, :for_user]
   before_action :find_or_create_hotel, only: [:create]
 
   def index
