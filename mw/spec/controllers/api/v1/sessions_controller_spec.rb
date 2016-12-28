@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :controller do
-  describe 'POST #Create' do
-    let(:user) { User.first }
+  let(:user) { FactoryGirl.create(:user) }
+  describe 'POST #create' do
     before :each do
       request.env['devise.mapping'] = Devise.mappings[:user]
     end
@@ -30,8 +30,7 @@ RSpec.describe Api::V1::SessionsController, type: :controller do
     end
   end
 
-  describe 'DELTE #Destroy' do
-    let(:user) { User.first }
+  describe 'DELTE #destroy' do
     before :each do
       request.env['devise.mapping'] = Devise.mappings[:user]
       sign_in user

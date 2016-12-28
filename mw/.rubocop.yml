@@ -4,6 +4,7 @@ AllCops:
     - db/migrate/*
     - bin/**
     - app/mailers/**
+    - config/initializers/**
 Rails:
   Enabled: true
 Metrics/MethodLength:
@@ -15,4 +16,4 @@ Style/AsciiComments:
 Metrics/LineLength:
   Max: 120
 Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
+  Enabled: false

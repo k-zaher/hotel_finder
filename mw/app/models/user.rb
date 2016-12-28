@@ -5,4 +5,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :trackable, :validatable, :token_authenticatable
   # Relations
   has_many :authentication_tokens
+  has_many :bookings
 end

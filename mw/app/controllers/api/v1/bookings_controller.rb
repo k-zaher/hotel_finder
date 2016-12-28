@@ -1,5 +1,5 @@
 # Booking Controller which handles create and the Public API
-class Api::V1::BookingsController < ApplicationController
+class Api::V1::BookingsController < Api::BaseController
   before_action :authenticate_user!, only: [:create]
   before_action :find_or_create_hotel, only: [:create]
 
@@ -12,12 +12,12 @@ class Api::V1::BookingsController < ApplicationController
   end
 
   def create
-    booking = @hotel.bookings.build(booking_params)
-    booking.user_id = current_user.id
-    if booking.save
-      render json: { booking: booking }, status: :ok
+    @booking = @hotel.bookings.build(booking_params)
+    @booking.user_id = current_user.id
+    if @booking.save
+      render json: { booking: @booking }, status: :ok
     else
-      render json: { message: booking.errors.full_messages }, status: 422
+      render json: { message: @booking.errors.full_messages }, status: 422
     end
   end
 
